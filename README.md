@@ -1,7 +1,6 @@
-# NodeJS-MongoDB-Demo
+# Micropets Elephants
 
-This is an example NodeJS application that works with MongoDB on Tanzu Application Platform 
+Implements the Micropets API using Node/JS server and MongoDB database (azure/local)
+The delivery relies on Tanzu Application platform provided by VMware.
 
-The application is a very simple list where you can add or delete values.
-
-That's it, the application will use the environnement variables to connect to MongoDB.
+Note: initially forked from https://github.com/CleverCloud/expressjs-mongodb-statsd-example
