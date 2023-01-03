@@ -1,0 +1,69 @@
+---
+apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+kind: ClusterInstanceClass
+metadata:
+  name: azure-mongodb
+spec:
+  description:
+    short: Azure CosmoDB instances with a MongoDB engine
+  pool:
+    kind: Secret
+    labelSelector:
+      matchLabels:
+        services.apps.tanzu.vmware.com/class: azure-mongodb
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: azure-mongodb-servicebinding-controller-secret-reader
+  labels:
+    servicebinding.io/controller: "true"
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - secrets
+  verbs:
+  - get
+  - list
+  - watch
+---
+apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+kind: ResourceClaimPolicy
+metadata:
+  name: developer-in-dev-tap-can-claim-azure-mongodb
+  namespace: mongodb-instances-fr
+spec:
+  subject:
+    kind: Secret
+    group: ""
+    selector:
+      matchLabels:
+        services.apps.tanzu.vmware.com/class: azure-mongodb
+  consumingNamespaces:
+  - 'dev-tap'
+---
+apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+kind: ResourceClaim
+metadata:
+  name: mongodb-database-azure-exposed
+  namespace: dev-tap
+spec:
+  ref:
+    apiVersion: v1
+    kind: Secret
+    name: mongodb-credentials-azure-exposed
+    namespace: mongodb-instances-fr
+---
+apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+kind: ResourceClaim
+metadata:
+  name: mongodb-database-remote
+  namespace: dev-tap
+spec:
+  ref:
+    apiVersion: v1
+    kind: Secret
+    name: mongodb-credentials-manually-managed
+    namespace: mongodb-instances-fr
+

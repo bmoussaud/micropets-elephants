@@ -1,0 +1,101 @@
+
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: mongodb-instances-fr
+---
+apiVersion: resources.azure.com/v1beta20200601
+kind: ResourceGroup
+metadata:
+  name: mongodb-instances-fr
+  namespace: mongodb-instances-fr
+spec:
+  location: francecentral
+---
+apiVersion: documentdb.azure.com/v1beta20210515
+kind: DatabaseAccount
+metadata:
+  name: simple-mongodb-app-db-account
+  namespace: mongodb-instances-fr
+spec:
+  location: francecentral
+  owner:
+    name: mongodb-instances-fr
+  kind: MongoDB
+  databaseAccountOfferType: Standard
+  locations:
+    - locationName: francecentral
+  # Optional: Save the connection details for this DatabaseAccount into a Kubernetes secret
+  operatorSpec:
+    secrets:
+      primaryMasterKey:
+        name: db-secret
+        key: primarymasterkey
+      secondaryMasterKey:
+        name: db-secret
+        key: secondarymasterkey
+      documentEndpoint:
+        name: db-secret
+        key: endpoint
+---
+apiVersion: documentdb.azure.com/v1beta20210515
+kind: MongodbDatabase
+metadata:
+  name: simple-mongodb-app-db
+  namespace: mongodb-instances-fr
+spec:
+  location: francecentral
+  owner:
+    name: simple-mongodb-app-db-account
+  options:
+    autoscaleSettings:
+      maxThroughput: 4000
+  resource:
+    id: simple-mongodb-app-db
+---
+apiVersion: documentdb.azure.com/v1beta20210515
+kind: MongodbDatabaseCollection
+metadata:
+  name: sample-mongo-collection
+  namespace: mongodb-instances-fr
+spec:
+  location: francecentral
+  owner:
+    name: simple-mongodb-app-db
+  options:
+    throughput: 400
+  resource:
+    id: sample-mongo-collection
+    indexes:
+      - key:
+          keys: ["_id"]
+        options:
+          unique: true
+      - key:
+          keys: ["col1", "col2"]
+        options:
+          unique: false
+---
+apiVersion: documentdb.azure.com/v1beta20210515
+kind: MongodbDatabaseCollectionThroughputSetting
+metadata:
+  name: sample-mongo-throughput
+  namespace: mongodb-instances-fr
+spec:
+  owner:
+    name: sample-mongo-collection
+  resource:
+    throughput: 500
+---
+apiVersion: documentdb.azure.com/v1beta20210515
+kind: MongodbDatabaseThroughputSetting
+metadata:
+  name: sample-mongo-throughput
+  namespace: mongodb-instances-fr
+spec:
+  owner:
+    name: simple-mongodb-app-db
+  resource:
+    autoscaleSettings:
+      maxThroughput: 4000

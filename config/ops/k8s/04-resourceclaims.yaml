@@ -1,0 +1,11 @@
+apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+kind: ResourceClaim
+metadata:
+  name: todo-mongodb-credentials
+  namespace: dev-tap
+spec:
+  ref:
+    apiVersion: v1
+    kind: Secret
+    name: todo-mongodb-credentials-exposed
+    namespace: mongodb # optional (if claiming across namespaces)
