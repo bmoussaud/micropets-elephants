@@ -46,22 +46,19 @@ if (app.get('env') === 'development') {
 // production error handler
 // no stacktraces leaked to user
 app.use(function (err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
+  console.log("ERROR =>" + err.message)
+
 });
 
 
 const all = csb.all_bindings()
 console.log(all)
-console.log("-->>>loadConfiguration -----------------------------------------------")
+console.log("!!!!-->>>loadConfiguration -----------------------------------------------")
 const appBindings = csb.bindings("app-configuration")
 //load the applications bindings as environment variables
 console.log(appBindings)
 Object.entries(appBindings).forEach(([k, v]) => { process.env[k] = v })
-console.log("<-- loadConfiguration -----------------------------------------------")
+console.log("<===-- loadConfiguration -----------------------------------------------")
 
 mongodb.connectDB();
 

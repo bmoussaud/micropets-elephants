@@ -16,7 +16,7 @@ spec:
 apiVersion: documentdb.azure.com/v1beta20210515
 kind: DatabaseAccount
 metadata:
-  name: simple-mongodb-app-db-account
+  name: micropets-db-account
   namespace: mongodb-instances-fr
 spec:
   location: francecentral
@@ -42,60 +42,56 @@ spec:
 apiVersion: documentdb.azure.com/v1beta20210515
 kind: MongodbDatabase
 metadata:
-  name: simple-mongodb-app-db
+  name: micropets-db
   namespace: mongodb-instances-fr
 spec:
   location: francecentral
   owner:
-    name: simple-mongodb-app-db-account
+    name: micropets-db-account
   options:
     autoscaleSettings:
       maxThroughput: 4000
   resource:
-    id: simple-mongodb-app-db
+    id: micropets-db
 ---
 apiVersion: documentdb.azure.com/v1beta20210515
 kind: MongodbDatabaseCollection
 metadata:
-  name: sample-mongo-collection
+  name: micropets-db-collection
   namespace: mongodb-instances-fr
 spec:
   location: francecentral
   owner:
-    name: simple-mongodb-app-db
+    name: micropets-db
   options:
     throughput: 400
   resource:
-    id: sample-mongo-collection
+    id: micropets-db-collection
     indexes:
       - key:
           keys: ["_id"]
         options:
-          unique: true
-      - key:
-          keys: ["col1", "col2"]
-        options:
-          unique: false
+          unique: true      
 ---
 apiVersion: documentdb.azure.com/v1beta20210515
 kind: MongodbDatabaseCollectionThroughputSetting
 metadata:
-  name: sample-mongo-throughput
+  name: micropets-db-mongo-throughput
   namespace: mongodb-instances-fr
 spec:
   owner:
-    name: sample-mongo-collection
+    name: micropets-db-collection
   resource:
     throughput: 500
 ---
 apiVersion: documentdb.azure.com/v1beta20210515
 kind: MongodbDatabaseThroughputSetting
 metadata:
-  name: sample-mongo-throughput
+  name: micropets-db-mongo-throughput
   namespace: mongodb-instances-fr
 spec:
   owner:
-    name: simple-mongodb-app-db
+    name: micropets-db
   resource:
     autoscaleSettings:
       maxThroughput: 4000

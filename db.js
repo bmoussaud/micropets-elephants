@@ -5,14 +5,14 @@ const { options } = require('mongoose');
 
 var csb = require('./config-service-binding');
 
-var schemaPet = mongoose.Schema({
+var PetSchema = mongoose.Schema({
     Name: String,
     Kind: String,
     Age: Number,
     URL: String,
     From: String
 });
-var ValuesPets = mongoose.model('valuesPets', schemaPet);
+var Pet = mongoose.model('Pet', PetSchema);
 
 function bindingsToMongoDbUrl(binding) {
     if ("connectionString" in binding) {
@@ -48,10 +48,9 @@ module.exports = {
         }
     },
 
-
     getPets: function (res) {
-
-        return ValuesPets.find(function (err, result) {
+        return Pet.find(function (err, result) {
+            console.log("getPets.....")
             if (err) {
                 console.log(err);
                 res.send('database error');
@@ -77,7 +76,7 @@ module.exports = {
     },
 
     getPet: function (res, uuid) {
-        return ValuesPets.findById(uuid, function (err, result) {
+        return Pet.findById(uuid, function (err, result) {
             if (err) {
                 console.log(err);
                 res.send('database error');
@@ -99,26 +98,22 @@ module.exports = {
     },
 
     sendPet: function (name, kind, age, url) {
-        var request = new ValuesPets({
+        console.log("sendPet:" + name)
+        var pet = new Pet({
             Name: name,
             Kind: kind,
             Age: age,
             URL: url,
             From: ""
         });
-        request.save((err, result) => {
-            if (err) {
-                console.log(err);
-                res.send(JSON.stringify({ status: "error", value: "Error, db request failed" }));
-                return
-            }
-            statsd.increment('creationsPets');
-        });
+        return pet.save()
+            .then(pet => console.log('The pet ' + pet.Name + ' has been added.'))
+            .catch(err => console.log("Error:" + err))
     },
 
     deleteAllPets: function () {
-        ValuesPets.deleteMany().then(function () {
-            console.log("Pet sData deleted"); // Success
+        Pet.deleteMany().then(function () {
+            console.log("PetsData deleted"); // Success
         })
         statsd.increment('deletionPets');
     }

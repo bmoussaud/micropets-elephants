@@ -4,12 +4,7 @@ metadata:
   name: secured-autfw-ui-config
 stringData:
   # property-like keys; each key maps to a simple value
-  ADMIN_ACCOUNTS: "benoit@vmware.com"
-  ADMIN_ORGCODE: "abcde"
-  COOKIE_SECRET: "kjdjmkjfqmljfmlqjdfmljqlmkfjldmjmqjflmjfljqslmjlfj=="
-  DB_CONNECTION_STRING: "mongodb://sample-mongodb-account-beta:dkslqjdlkqjsdlkqskldjqslkjd==@sample-mongodb-account-beta.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@sample-mongodb-account-beta@"
-  DB_NAME: "bigdevdatabase3"
-  type: "app-configuration"
-  MONGODB_ADDON_URI: mongodb://simple-mongodb-app-db-account:d2NnAEhKcPt3DQeFSifhjziVXQq534YSfSSngBckHjVcJi1GwxXBKTqow8PPvYsIlEwjReJYLVidACDbHwgI5A==@simple-mongodb-app-db-account.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&retrywrites=false&maxIdleTimeMS=120000&appName=@simple-mongodb-app-db-account@
+  type: app-configuration
   TITLE: NodeJS App with Tanzu Application Platform
   PORT: "8080"
+  ENV: TAP/1.3

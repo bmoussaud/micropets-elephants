@@ -1,7 +1,7 @@
 apiVersion: services.apps.tanzu.vmware.com/v1alpha1
 kind: ResourceClaim
 metadata:
-  name: todo-mongodb-credentials
+  name: elephants-k8s-mongodb-database
   namespace: dev-tap
 spec:
   ref:
