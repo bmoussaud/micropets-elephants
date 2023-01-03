@@ -14,7 +14,7 @@
     "mongoose": "^5.8.11",
     "morgan": ">=1.10.0",
     "node-statsd": "^0.1.1",
-    "pug": "^2.0.4",
+    "pug": "^3.0.2",
     "serve-favicon": "~2.5.0"
   },
   "devDependencies": {
