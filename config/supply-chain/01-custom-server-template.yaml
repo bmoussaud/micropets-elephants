@@ -12,7 +12,7 @@ spec:
           name: http
           port: 8080
       name: ports
-    - default: "notprovided.aramco.co"
+    - default: "notprovided.mydomain.co"
       name: "fqdn"
   ytt: |
     #@ load("@ytt:data", "data")
