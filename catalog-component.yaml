@@ -4,8 +4,7 @@ metadata:
   name: elephants  
   description: Micropets Elephants Service
   tags:
-    - web
-    - tanzu
+    - web    
     - NodeJS
     - MongoDB
   annotations:
