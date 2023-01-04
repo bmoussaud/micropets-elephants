@@ -17,11 +17,11 @@ spec:
       ref:
         branch: main
   serviceClaims:
-    - name: my-fwui-config
+    - name: app-config
       ref:
         apiVersion: v1
         kind: Secret
-        name: secured-autfw-ui-config
+        name: elephants-configuration
     - name: mongodb-database
       ref:
         apiVersion: v1

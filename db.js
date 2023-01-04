@@ -25,13 +25,12 @@ function bindingsToMongoDbUrl(binding) {
 
 module.exports = {
     connectDB: function () {
-        console.log("--> connectDB")
+        console.log("->>>connectDB")
         if (!process.env.MONGODB_ADDON_URI === undefined) {
             console.log('Connecting using MONGODB_ADDON_URI env: ');
             mongoose.connect(process.env.MONGODB_ADDON_URI, { useNewUrlParser: true });
         } else {
-            console.log('Connecting Using Service Binding....');
-            console.log("check if the deployment has been bound to a mongodb instance through service bindings. If so use that connect info")
+            console.log('Connecting Using Service Binding (mongodb)....');            
             const mongoDbBindings = csb.bindings("mongodb")
             console.log(mongoDbBindings)
             const uri = bindingsToMongoDbUrl(mongoDbBindings)
