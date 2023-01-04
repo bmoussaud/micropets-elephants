@@ -2,8 +2,7 @@
 
 Implements the Micropets API using Node/JS server and MongoDB database either from 
 * [a managed service azure](config/ops/azure) `kubectl apply -f config/ops/azure`  (require [Azure Service Operator (for Kubernetes)](https://github.com/Azure/azure-service-operator) ) or
-* [a local operator](config/ops/k8s) running in the Kubernetes Cluster `kubectl apply -f config/ops/k8s`
-
+* [a local operator](config/ops/k8s) running in the Kubernetes Cluster `kubectl apply -f config/ops/mongodb-operator/00-mongodb-operator.yaml -f config/ops/k8s`
 
 The delivery relies on Tanzu Application platform provided by VMware.
 
