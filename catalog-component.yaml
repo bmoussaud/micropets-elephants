@@ -1,14 +1,15 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: elephants  
+  name: elephants
   description: Micropets Elephants Service
   tags:
-    - web    
-    - NodeJS
-    - MongoDB
+    - web
+    - tanzu
+    - nodejs
+    - mongodb
   annotations:
-    'backstage.io/kubernetes-label-selector': 'app.kubernetes.io/name=elephants'    
+    "backstage.io/kubernetes-label-selector": "app.kubernetes.io/name=elephants"
 spec:
   type: service
   lifecycle: experimental
