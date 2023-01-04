@@ -23,6 +23,32 @@ function bindingsToMongoDbUrl(binding) {
     }
 }
 
+function sendPet(name, kind, age, url) {
+    console.log("sendPet:" + name)
+    var pet = new Pet({
+        Name: name,
+        Kind: kind,
+        Age: age,
+        URL: url,
+        From: ""
+    });
+    return pet.save()
+        .then(pet => console.log('The pet ' + pet.Name + ' has been added.'))
+        .catch(err => console.log("Error:" + err))
+}
+
+function deleteAllPets() {
+    Pet.deleteMany().then(function () {
+        console.log("PetsData deleted"); // Success
+    })
+}
+
+function countPets() {
+    return Pet.count()
+        .catch(err => console.log("countPets catch:" + err))
+        .then(result => { return result })
+}
+
 module.exports = {
     connectDB: function () {
         console.log("->>>connectDB")
@@ -30,7 +56,7 @@ module.exports = {
             console.log('Connecting using MONGODB_ADDON_URI env: ');
             mongoose.connect(process.env.MONGODB_ADDON_URI, { useNewUrlParser: true });
         } else {
-            console.log('Connecting Using Service Binding (mongodb)....');            
+            console.log('Connecting Using Service Binding (mongodb)....');
             const mongoDbBindings = csb.bindings("mongodb")
             console.log(mongoDbBindings)
             const uri = bindingsToMongoDbUrl(mongoDbBindings)
@@ -40,6 +66,15 @@ module.exports = {
             mongoose.connect(uri, { ssl: false, useNewUrlParser: true })
                 .then(() => {
                     console.log('Connected to the database !')
+                    Pet.count().then(total => {
+                        if (total == 0) {
+                            sendPet("Surus", "King Elephant", 12, "https://upload.wikimedia.org/wikipedia/commons/1/1c/Wildlife_Elephant.jpg");
+                            sendPet("Tristram", "Black Elephant", 34, "https://upload.wikimedia.org/wikipedia/commons/c/cd/Adult_elephant.jpg");
+                            sendPet("Naoned", "Nantes Elephant", 14, "https://live.staticflickr.com/8297/7936097148_7a67233cab_b.jpg");
+                            sendPet("WetWetWet", "Lake Elephant", 8, "https://www.publicdomainpictures.net/pictures/280000/velka/african-elephant-in-water.jpg");
+                            console.log('Data initialized!')
+                        }
+                    })
                 })
                 .catch((err) => {
                     console.error(`Error connecting to the database. \n${err}`);
@@ -47,32 +82,28 @@ module.exports = {
                 })
         }
     },
-
-    getPets: function (res) {
-        return Pet.find(function (err, result) {
-            console.log("getPets.....")
-            if (err) {
-                console.log(err);
-                res.send('database error');
-                return
-            }
-            var pets = []
-            var from = process.env.ENV || 'AKS/4'
-            for (var i in result) {
-                var val = result[i];
-                pets.push({
-                    Index: val['_id'],
-                    Name: val['Name'],
-                    Kind: val['Kind'],
-                    Age: val['Age'],
-                    URL: val['URL'],
-                    From: from,
-                    URI: "/elephants/v1/data/" + val['_id']
-                })
-            }
-            res.status(201).send(JSON.stringify({ Total: pets.length, Hostname: os.hostname(), Pets: pets }));
-
-        });
+   
+    getPets: function () {
+        return Pet.find()
+            .catch(err => console.log("getPets catch:" + err))
+            .then(result => {
+                console.log("getPets then :")
+                var pets = []
+                var from = process.env.ENV || 'AKS/4'
+                for (var i in result) {
+                    var val = result[i];
+                    pets.push({
+                        Index: val['_id'],
+                        Name: val['Name'],
+                        Kind: val['Kind'],
+                        Age: val['Age'],
+                        URL: val['URL'],
+                        From: from,
+                        URI: "/elephants/v1/data/" + val['_id']
+                    })
+                }
+                return { Total: pets.length, Hostname: os.hostname(), Pets: pets }
+            })
     },
 
     getPet: function (res, uuid) {
@@ -91,31 +122,13 @@ module.exports = {
                 Age: val['Age'],
                 URL: val['URL'],
                 From: from,
-
                 URI: "/elephants/v1/data/" + val['_id']
             }));
         });
     },
 
-    sendPet: function (name, kind, age, url) {
-        console.log("sendPet:" + name)
-        var pet = new Pet({
-            Name: name,
-            Kind: kind,
-            Age: age,
-            URL: url,
-            From: ""
-        });
-        return pet.save()
-            .then(pet => console.log('The pet ' + pet.Name + ' has been added.'))
-            .catch(err => console.log("Error:" + err))
-    },
-
-    deleteAllPets: function () {
-        Pet.deleteMany().then(function () {
-            console.log("PetsData deleted"); // Success
-        })
-        statsd.increment('deletionPets');
-    }
+    countPets: countPets,
+    sendPet: sendPet,
+    deleteAllPets: deleteAllPets
 
 };
