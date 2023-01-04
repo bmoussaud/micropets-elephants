@@ -7,5 +7,5 @@ spec:
   ref:
     apiVersion: v1
     kind: Secret
-    name: todo-mongodb-credentials-exposed
+    name: elephants-mongodb-credentials
     namespace: mongodb # optional (if claiming across namespaces)

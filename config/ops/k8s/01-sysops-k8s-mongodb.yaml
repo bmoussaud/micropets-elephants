@@ -2,7 +2,8 @@
 apiVersion: mongodbcommunity.mongodb.com/v1
 kind: MongoDBCommunity
 metadata:
-  name: todo-mongodb
+  name: elephants-mongodb
+  namespace: mongodb
 spec:
   members: 3
   type: ReplicaSet
@@ -33,6 +34,7 @@ apiVersion: secretgen.k14s.io/v1alpha1
 kind: Password
 metadata:
   name: my-user-password
+  namespace: mongodb
 spec:
   length: 24
   secretTemplate:

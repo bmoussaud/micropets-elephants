@@ -32,6 +32,7 @@ apiVersion: services.apps.tanzu.vmware.com/v1alpha1
 kind: ResourceClaimPolicy
 metadata:
   name: developers-in-any-namespaces-can-claim-local-mongodb
+  namespace: mongodb
 spec:
   subject:
     kind: Secret
