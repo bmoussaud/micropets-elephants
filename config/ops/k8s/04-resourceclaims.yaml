@@ -1,11 +1,11 @@
 apiVersion: services.apps.tanzu.vmware.com/v1alpha1
 kind: ResourceClaim
 metadata:
-  name: elephants-k8s-mongodb-database
+  name: micropets-mongodb-k8s-credentials
   namespace: dev-tap
 spec:
   ref:
     apiVersion: v1
-    kind: Secret
-    name: elephants-mongodb-credentials
+    kind: Secret    
+    name: micropets-mongodb-k8s-credentials
     namespace: mongodb # optional (if claiming across namespaces)

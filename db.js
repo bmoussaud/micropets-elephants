@@ -19,7 +19,7 @@ function bindingsToMongoDbUrl(binding) {
         return binding.connectionString
     }
     else {
-        return ['mongodb', '://', `${binding.username}`, ':', `${binding.password}`, '@', `${binding.host}`, `:${binding.port}`].join('');
+        return ['mongodb', '://', `${binding.username}`, ':', `${binding.password}`, '@', `${binding.host}`, `:${binding.port}`, `${binding.options}`].join('');
     }
 }
 
@@ -63,7 +63,7 @@ module.exports = {
             console.log(uri)
             mongoose.set('strictQuery', true)
             //TODO:mage ssl:false when using the local mongodatabase and :true when using the azure mongodatabase
-            mongoose.connect(uri, { ssl: false, useNewUrlParser: true })
+            mongoose.connect(uri, { useNewUrlParser: true })
                 .then(() => {
                     console.log('Connected to the database !')
                     Pet.count().then(total => {
@@ -82,7 +82,7 @@ module.exports = {
                 })
         }
     },
-   
+
     getPets: function () {
         return Pet.find()
             .catch(err => console.log("getPets catch:" + err))

@@ -26,7 +26,7 @@ spec:
       ref:
         apiVersion: v1
         kind: Secret
-        name: elephants-mongodb-credentials
+        name: micropets-mongodb-azure-credentials
   params:
     - name: fqdn
       value: www.dev-tap.tap3.eu.aks.mytanzu.xyz

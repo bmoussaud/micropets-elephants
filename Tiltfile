@@ -1,5 +1,5 @@
 # You will need to modify this file to enable Tilt live debugging
-SOURCE_IMAGE = os.getenv("SOURCE_IMAGE", default='akseutap3registry.azurecr.io/elephants') 
+SOURCE_IMAGE = os.getenv("SOURCE_X_IMAGE", default='akseutap3registry.azurecr.io/elephants') 
 LOCAL_PATH = os.getenv("LOCAL_PATH", default='.')
 NAMESPACE = os.getenv("NAMESPACE", default='dev-tap')
 K8S_TEST_CONTEXT = os.getenv("K8S_TEST_CONTEXT", default='aks-eu-tap-3')
