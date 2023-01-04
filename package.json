@@ -7,7 +7,7 @@
   },
   "dependencies": {
     "body-parser": "~1.20.1",
-    "cookie-parser": "~1.4.5",
+    "cookie-parser": "~1.4.6",
     "debug": "~4.3.4",
     "express": "~4.18.2",
     "kube-service-bindings": "^2.1.0",
