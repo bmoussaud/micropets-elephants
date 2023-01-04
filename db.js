@@ -36,6 +36,7 @@ module.exports = {
             console.log(mongoDbBindings)
             const uri = bindingsToMongoDbUrl(mongoDbBindings)
             console.log(uri)
+            mongoose.set('strictQuery', true)
             //TODO:mage ssl:false when using the local mongodatabase and :true when using the azure mongodatabase
             mongoose.connect(uri, { ssl: false, useNewUrlParser: true })
                 .then(() => {
