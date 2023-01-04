@@ -26,7 +26,7 @@ spec:
       ref:
         apiVersion: v1
         kind: Secret
-        name: micropets-mongodb-azure-credentials
+        name: micropets-mongodb-k8s-credentials
   params:
     - name: fqdn
       value: www.dev-tap.tap3.eu.aks.mytanzu.xyz
