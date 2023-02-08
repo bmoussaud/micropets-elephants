@@ -4,9 +4,11 @@ metadata:
   name: elephants
   annotations:
     serviceclaims.supplychain.apps.x-tanzu.vmware.com/extensions: '{"kind":"ServiceClaimsExtension","apiVersion":"supplychain.apps.x-tanzu.vmware.com/v1alpha1","spec":{"serviceClaims":{"mongodb-database-not-used":{"namespace":"mongodb"}}}}'
+    autoscaling.knative.dev/minScale: "1"
   labels:
     apps.tanzu.vmware.com/workload-type-x: custom-server
     apps.tanzu.vmware.com/workload-type: web
+    apps.tanzu.vmware.com/has-tests: "true"
     app.kubernetes.io/name: elephants
     app.kubernetes.io/part-of: micropets-app
     micropets/kind: backend
@@ -31,14 +33,6 @@ spec:
   params:
     - name: fqdn
       value: www.dev-tap.tap3.eu.aks.mytanzu.xyz
-    - name: prefix
-      value: my-custom-prefix
-    - name: gitops_server_address
-      value: https://github.com/
-    - name: gitops_repository_owner
-      value: bmoussaud
-    - name: gitops_repository_name
-      value: micropets-app-gitops
-    - name: annotations
+    - name: testing_pipeline_matching_labels
       value:
-        autoscaling.knative.dev/minScale: "1"
+        apps.tanzu.vmware.com/pipeline: micropets-skip-test
