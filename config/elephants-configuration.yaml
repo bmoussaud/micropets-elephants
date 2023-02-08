@@ -9,4 +9,4 @@ stringData:
   type: app-configuration
   TITLE: NodeJS App with Tanzu Application Platform
   PORT: "8080"
-  ENV: TAP/1.3
+  ENV: TAP/1.4
