@@ -4,6 +4,7 @@ var mongodb = require('../db');
 var router = express.Router();
 
 router.get('/', function (req, res) {
+  mongodb.connectDB();
   mongodb.getPets().then(function (pets) {
     res.setHeader('Content-Type', 'application/json');
     res.status(201).send(JSON.stringify(pets));
@@ -11,6 +12,7 @@ router.get('/', function (req, res) {
 })
 
 router.get('/count', function (req, res) {
+  mongodb.connectDB();
   mongodb.countPets().then(function (pets) {
     res.setHeader('Content-Type', 'application/json');
     res.status(201).send({ count: pets });
@@ -18,6 +20,7 @@ router.get('/count', function (req, res) {
 })
 
 router.get('/elephants/v1/data', function (req, res) {
+  mongodb.connectDB();
   mongodb.getPets().then(function (pets) {
     res.setHeader('Content-Type', 'application/json');
     res.status(201).send(JSON.stringify(pets));
@@ -25,6 +28,7 @@ router.get('/elephants/v1/data', function (req, res) {
 })
 
 router.get('/elephants/v1/data/:id', function (req, res) {
+  mongodb.connectDB();
   res.setHeader('Content-Type', 'application/json');
   console.log("Get one elephants")
   var uuid = req.params.id;
@@ -32,6 +36,7 @@ router.get('/elephants/v1/data/:id', function (req, res) {
 })
 
 router.get('/elephants/v1/load', function (req, res) {
+  mongodb.connectDB();
   res.setHeader('Content-Type', 'application/json');
   console.log("Load all the elephants")
   mongodb.deleteAllPets()
@@ -43,6 +48,7 @@ router.get('/elephants/v1/load', function (req, res) {
 })
 
 router.get('/elephants/v1/delete', function (req, res) {
+  mongodb.connectDB();
   res.setHeader('Content-Type', 'application/json');
   mongodb.deleteAllPets()
   res.status(201).send(JSON.stringify({ status: "ok" }))
