@@ -1,11 +1,11 @@
 apiVersion: services.apps.tanzu.vmware.com/v1alpha1
 kind: ResourceClaim
 metadata:
-  name: micropets-mongodb-k8s-credentials  
+  name: micropets-mongodb-k8s-credentials
 spec:
   ref:
     apiVersion: v1
-    kind: Secret    
+    kind: Secret
     name: micropets-mongodb-k8s-credentials
     namespace: mongodb # optional (if claiming across namespaces)
 ---
@@ -14,10 +14,11 @@ kind: Secret
 metadata:
   name: elephants-configuration
   labels:
-    app.kubernetes.io/part-of: elephants
+    app.kubernetes.io/name: elephants
+    app.kubernetes.io/part-of: micropets
 stringData:
   # property-like keys; each key maps to a simple value
   type: app-configuration
-  TITLE: NodeJS App with Tanzu Application Platform
+  TITLE: Micropets NodeJS App with Tanzu Application Platform
   PORT: "8080"
   ENV: TAP/1.4
