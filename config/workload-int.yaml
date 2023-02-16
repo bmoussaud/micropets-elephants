@@ -33,3 +33,28 @@ spec:
     - name: testing_pipeline_matching_labels
       value:
         apps.tanzu.vmware.com/pipeline: skip-test
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: elephants-configuration
+  labels:
+    app.kubernetes.io/name: elephants
+    app.kubernetes.io/part-of: micropets
+stringData:
+  # property-like keys; each key maps to a simple value
+  type: app-configuration
+  TITLE: Micropets NodeJS App with Tanzu Application Platform
+  PORT: "8080"
+  ENV: TAPINT/1.4
+---
+apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+kind: ResourceClaim
+metadata:
+  name: micropets-int-mongodb-k8s-credentials
+spec:
+  ref:
+    apiVersion: v1
+    kind: Secret
+    name: micropets-int-mongodb-k8s-credentials
+    namespace: mongodb # optional (if claiming across namespaces)
