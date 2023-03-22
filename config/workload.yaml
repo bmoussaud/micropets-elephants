@@ -37,6 +37,6 @@ spec:
       value:
         apps.tanzu.vmware.com/pipeline: skip-test
     - name: scanning_source_policy
-      value: nodejs-mongodb-policy
+      value: scan-policy-nodejs-mongodb
     - name: scanning_image_policy
-      value: nodejs-mongodb-policy
+      value: scan-policy-nodejs-mongodb
