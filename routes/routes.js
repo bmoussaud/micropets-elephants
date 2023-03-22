@@ -21,17 +21,22 @@ router.get('/count', function (req, res) {
 
 router.get('/elephants/v1/data', function (req, res) {
   mongodb.connectDB();
+  console.log(">>>>>>>>>>>>>>>>>>>>>>>>>GET all the elephants")
   mongodb.getPets().then(function (pets) {
     res.setHeader('Content-Type', 'application/json');
     res.status(201).send(JSON.stringify(pets));
   })
 })
 
-router.get('/elephants/v1/data/:id', function (req, res) {
+router.get('/elephants/v1/data/:petid', function (req, res) {
+  console.log("!!???!! Get one elephant ")
   mongodb.connectDB();
   res.setHeader('Content-Type', 'application/json');
-  console.log("Get one elephants")
-  var uuid = req.params.id;
+
+  var uuid = req.params.petid;
+  console.log(req)
+  console.log(req.params)
+  console.log("BEnoitWWWW 2 Get one elephants" + uuid)
   mongodb.getPet(res, uuid);
 })
 

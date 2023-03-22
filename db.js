@@ -107,24 +107,26 @@ module.exports = {
     },
 
     getPet: function (res, uuid) {
-        return Pet.findById(uuid, function (err, result) {
-            if (err) {
+        return Pet.findById(uuid)
+            .then(function (result) {
+                console.log(result);
+                var val = result
+                var from = process.env.ENV || 'AKS/4'
+                res.status(201).send(JSON.stringify({
+                    Index: val['_id'],
+                    Name: val['Name'],
+                    Kind: val['Kind'],
+                    Age: val['Age'],
+                    URL: val['URL'],
+                    From: from,
+                    URI: "/elephants/v1/data/" + val['_id']
+                }));
+            })
+            .catch(function (err) {
                 console.log(err);
                 res.send('database error');
                 return
-            }
-            var val = result
-            var from = process.env.ENV || 'AKS/4'
-            res.status(201).send(JSON.stringify({
-                Index: val['_id'],
-                Name: val['Name'],
-                Kind: val['Kind'],
-                Age: val['Age'],
-                URL: val['URL'],
-                From: from,
-                URI: "/elephants/v1/data/" + val['_id']
-            }));
-        });
+            });
     },
 
     countPets: countPets,

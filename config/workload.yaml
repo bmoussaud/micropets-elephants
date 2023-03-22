@@ -40,3 +40,5 @@ spec:
       value: scan-policy-nodejs-mongodb
     - name: scanning_image_policy
       value: scan-policy-nodejs-mongodb
+    - name: userId
+      value: 1001
