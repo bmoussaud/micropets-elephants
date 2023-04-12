@@ -29,14 +29,12 @@ router.get('/elephants/v1/data', function (req, res) {
 })
 
 router.get('/elephants/v1/data/:petid', function (req, res) {
-  console.log("!!???!! Get one elephant ")
+  console.log("lll!!???!! Get one elephant ")
   mongodb.connectDB();
   res.setHeader('Content-Type', 'application/json');
 
   var uuid = req.params.petid;
-  console.log(req)
-  console.log(req.params)
-  console.log("BEnoitWWWW 2 Get one elephants" + uuid)
+  console.log(" 2 Get one elephants" + uuid)
   mongodb.getPet(res, uuid);
 })
 

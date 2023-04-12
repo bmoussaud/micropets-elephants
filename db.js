@@ -77,8 +77,8 @@ module.exports = {
                     })
                 })
                 .catch((err) => {
-                    console.error(`Error connecting to the database. \n${err}`);
-                    process.exit(1);
+                    console.error(`Error connecting to the database. Try again later....\n${err}`);
+                    //process.exit(1);
                 })
         }
     },
@@ -108,7 +108,8 @@ module.exports = {
 
     getPet: function (res, uuid) {
         return Pet.findById(uuid)
-            .then(function (result) {
+            .catch(err => console.log("single getPet catch:" + err))
+            .then(result => {
                 console.log(result);
                 var val = result
                 var from = process.env.ENV || 'AKS/4'
@@ -121,12 +122,7 @@ module.exports = {
                     From: from,
                     URI: "/elephants/v1/data/" + val['_id']
                 }));
-            })
-            .catch(function (err) {
-                console.log(err);
-                res.send('database error');
-                return
-            });
+            })            
     },
 
     countPets: countPets,
