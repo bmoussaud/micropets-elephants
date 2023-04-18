@@ -10,6 +10,13 @@ metadata:
   annotations:
     "backstage.io/kubernetes-label-selector": "app.kubernetes.io/name=elephants"
     backstage.io/techdocs-ref: dir:.
+  links:
+    - url: https://en.wikipedia.org/wiki/Elephants
+      title: "Elephants (wikipedia) "
+      icon: locallibrary
+    - url: https://github.com/bmoussaud/micropets-elephants
+      title: "Source Repository"
+      icon: locallibrary
 spec:
   type: service
   lifecycle: experimental
