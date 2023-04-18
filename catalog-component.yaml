@@ -15,14 +15,16 @@ spec:
   lifecycle: experimental
   owner: the-pet-team
   system: micropets
+  dependsOn:
+    - resource: default/elephants-db
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Resource
 metadata:
   name: elephants-db
-  description: Stores Elephants 
+  description: Stores Elephants
   annotations:
-    'backstage.io/techdocs-ref': dir:.
+    "backstage.io/techdocs-ref": dir:.
 spec:
   type: database
   owner: the-pet-team
