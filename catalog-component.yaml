@@ -4,7 +4,7 @@ metadata:
   name: elephants
   description: Micropets Elephants Service
   tags:
-    - web    
+    - web
     - nodejs
     - mongodb
   annotations:
@@ -16,13 +16,13 @@ metadata:
       icon: locallibrary
     - url: https://github.com/bmoussaud/micropets-elephants
       title: "Source Repository"
-      icon: locallibrary
+      icon: dashboard
 spec:
   type: service
   lifecycle: experimental
   owner: the-pet-team
   system: micropets
-  dependsOn: [Component:elephants-db]
+  dependsOn: [Resource:elephants-db]
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Resource
@@ -31,6 +31,8 @@ metadata:
   description: Stores Elephants
   annotations:
     "backstage.io/techdocs-ref": dir:.
+  tags:
+    - mongodb
 spec:
   type: database
   owner: the-pet-team
