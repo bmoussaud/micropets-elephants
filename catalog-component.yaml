@@ -16,8 +16,7 @@ spec:
   lifecycle: experimental
   owner: the-pet-team
   system: micropets
-  dependsOn:
-    - resource: default/elephants-db
+  dependsOn: [Component:elephants-db]
 ---
 apiVersion: backstage.io/v1alpha1
 kind: Resource
