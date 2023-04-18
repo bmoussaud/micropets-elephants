@@ -10,6 +10,7 @@ metadata:
     - mongodb
   annotations:
     "backstage.io/kubernetes-label-selector": "app.kubernetes.io/name=elephants"
+    backstage.io/techdocs-ref: dir:.
 spec:
   type: service
   lifecycle: experimental
