@@ -10,7 +10,7 @@
     "cookie-parser": "~1.4.6",
     "debug": "~4.3.4",
     "express": "~4.18.2",
-    "kube-service-bindings": "^2.1.0",
+    "kube-service-bindings": "^3.0.0",
     "mongoose": "^7.0.1",
     "morgan": ">=1.10.0",
     "node-statsd": "^0.1.1",
