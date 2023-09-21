@@ -1,7 +1,7 @@
 apiVersion: services.apps.tanzu.vmware.com/v1alpha1
 kind: ResourceClaim
 metadata:
-  name: micropets-mongodb-k8s-credentials
+  name: x-micropets-mongodb-k8s-credentials
 spec:
   ref:
     apiVersion: v1
@@ -12,7 +12,7 @@ spec:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: elephants-configuration
+  name: x-elephants-configuration
   labels:
     app.kubernetes.io/name: elephants
     app.kubernetes.io/part-of: micropets

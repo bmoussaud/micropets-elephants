@@ -19,7 +19,7 @@ function bindingsToMongoDbUrl(binding) {
         return binding.connectionString
     }
     else {
-        return ['mongodb', '://', `${binding.username}`, ':', `${binding.password}`, '@', `${binding.host}`, `:${binding.port}`, `${binding.options}`].join('');
+        return ['mongodb', '://', `${binding.username}`, ':', `${binding.password}`, '@', `${binding.host}`, `:${binding.port}`,`/${binding.database}`].join('');
     }
 }
 

@@ -1,0 +1,11 @@
+# tanzu service class-claim create elephants-mongodb --class mongodb-unmanaged --parameter storageGB=1
+apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+kind: ClassClaim
+metadata:
+  name: elephants-mongodb
+  namespace: micropets-dev  
+spec:
+  classRef:
+    name: mongodb-unmanaged
+  parameters:
+    storageGB: 1

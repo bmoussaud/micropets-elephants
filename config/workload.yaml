@@ -3,7 +3,7 @@ kind: Workload
 metadata:
   name: elephants-nodejs-mongodb
   annotations:
-    serviceclaims.supplychain.apps.x-tanzu.vmware.com/extensions: '{"kind":"ServiceClaimsExtension","apiVersion":"supplychain.apps.x-tanzu.vmware.com/v1alpha1","spec":{"serviceClaims":{"mongodb-database-not-used":{"namespace":"mongodb"}}}}'
+    not.used.serviceclaims.supplychain.apps.x-tanzu.vmware.com/extensions: '{"kind":"ServiceClaimsExtension","apiVersion":"supplychain.apps.x-tanzu.vmware.com/v1alpha1","spec":{"serviceClaims":{"mongodb-database-not-used":{"namespace":"mongodb"}}}}'
     autoscaling.knative.dev/minScale: "1"
   labels:
     apps.tanzu.vmware.com/workload-type-x: custom-server
@@ -13,7 +13,7 @@ metadata:
     app.kubernetes.io/part-of: micropets-app
     micropets/kind: backend
 spec:
-  serviceAccountName: tap-default
+  #serviceAccountName: tap-default
   source:
     git:
       url: https://github.com/bmoussaud/micropets-elephants
@@ -22,17 +22,15 @@ spec:
   serviceClaims:
     - name: app-config
       ref:
-        apiVersion: v1
-        kind: Secret
-        name: elephants-configuration
-    - name: mongodb-database
+        apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+        kind: ResourceClaim
+        name: elephants-config
+    - name: database
       ref:
-        apiVersion: v1
-        kind: Secret
-        name: micropets-mongodb-k8s-credentials
+        apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+        kind: ClassClaim
+        name: elephants-mongodb
   params:
-    - name: fqdn
-      value: www.dev-tap.tap3.eu.aks.mytanzu.xyz
     - name: testing_pipeline_matching_labels
       value:
         apps.tanzu.vmware.com/pipeline: skip-test
@@ -40,5 +38,3 @@ spec:
       value: scan-policy-nodejs-mongodb
     - name: scanning_image_policy
       value: scan-policy-nodejs-mongodb
-    - name: userId
-      value: 1001

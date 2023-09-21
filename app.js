@@ -52,9 +52,9 @@ app.use(function (err, req, res, next) {
 
 
 const all = csb.all_bindings()
-//console.log(all)
+console.log(all)
 console.log("->>>load app Configuration -----------------------------------------------")
-const appBindings = csb.bindings("app-configuration")
+const appBindings = csb.bindings("config")
 //load the applications bindings as environment variables
 console.log(appBindings)
 Object.entries(appBindings).forEach(([k, v]) => { process.env[k] = v })

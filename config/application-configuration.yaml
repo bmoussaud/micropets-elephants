@@ -1,0 +1,31 @@
+apiVersion: config.apps.tanzu.vmware.com/v1alpha4
+kind: ConfigurationSource
+metadata:
+  name: elephants-config
+spec:
+  backends:
+    - type: git
+      uri: https://github.com/bmoussaud/micropets-app-gitops.git
+      defaultLabel: main
+      searchPaths:
+        - appconfig/micropets-dev/elephants-golang
+---
+apiVersion: config.apps.tanzu.vmware.com/v1alpha4
+kind: ConfigurationSlice
+metadata:
+  name: elephants-config
+spec:
+  interval: 1s
+  configurationSource: elephants-config  
+  content:
+    - application/default
+---
+apiVersion: services.apps.tanzu.vmware.com/v1alpha1
+kind: ResourceClaim
+metadata:
+  name: elephants-config
+spec:
+  ref:
+    apiVersion: config.apps.tanzu.vmware.com/v1alpha4
+    kind: ConfigurationSlice
+    name: elephants-config

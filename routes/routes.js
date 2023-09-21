@@ -28,8 +28,7 @@ router.get('/elephants/v1/data', function (req, res) {
   })
 })
 
-router.get('/elephants/v1/data/:petid', function (req, res) {
-  console.log("lll!!???!! Get one elephant ")
+router.get('/elephants/v1/data/:petid', function (req, res) {  
   mongodb.connectDB();
   res.setHeader('Content-Type', 'application/json');
 

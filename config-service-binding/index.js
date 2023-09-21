@@ -12,6 +12,7 @@ function all_bindings() {
 
 function getBindingConfiguration(type, id) {
     const bindingDataPath = getBindingDataPath(getRoot(), type, id)
+    console.log(bindingDataPath)
     if (!isDefined(bindingDataPath)) {
         throw new Error('No Binding Found for ' + type + '/' + id);
     }
@@ -25,7 +26,7 @@ function isDefined(x) {
 function getBindingDataPath(root, type, id) {
     try {
         const candidates = fs.readdirSync(root);
-        //console.log(candidates)
+        console.log(candidates)
         for (const file of candidates) {
             const bindingType = fs
                 .readFileSync(path.join(root, file, 'type'))

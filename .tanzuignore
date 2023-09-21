@@ -3,7 +3,6 @@ target
 .github
 .idea
 .vscode
-config
 node_modules
 .vscode
 bindings
