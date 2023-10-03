@@ -37,4 +37,4 @@ spec:
     - name: scanning_source_policy
       value: scan-policy-nodejs-mongodb
     - name: scanning_image_policy
-      value: scan-policy-nodejs-mongodb
+      value: scan-policy-nodejs-mongodb   
