@@ -20,6 +20,7 @@ router.get("/count", function (req, res) {
   });
 });
 
+//http://elephants-nodejs-mongodb.micropets-dev.svc.cluster.local:80/elephants/v1/config
 router.get("/elephants/v1/config", function (req, res) {
   mongodb.connectDB();
   console.log(">>>>>>>>>>>>>>>>>>>>>>>>>Configuration");
