@@ -14,7 +14,7 @@ var PetSchema = mongoose.Schema({
 });
 var Pet = mongoose.model("Pet", PetSchema);
 
-function bindingsToMongoDbUrl(binding) { 
+function bindingsToMongoDbUrl(binding) {
   if ("connectionString" in binding) {
     return binding.connectionString;
   } else {
@@ -25,6 +25,20 @@ function bindingsToMongoDbUrl(binding) {
       ":",
       `${binding.password}`,
       "@",
+      `${binding.host}`,
+      `:${binding.port}`,
+      `/${binding.database}`,
+    ].join("");
+  }
+}
+
+function bindingsToMongoDbUrl2(binding) {
+  if ("connectionString" in binding) {
+    return binding.connectionString;
+  } else {
+    return [
+      "mongodb",
+      "://",
       `${binding.host}`,
       `:${binding.port}`,
       `/${binding.database}`,
@@ -173,9 +187,18 @@ module.exports = {
     console.log("->>>getInfo");
     const mongoDbBindings = csb.bindings("mongodb");
     console.log("b" + mongoDbBindings);
-    const uri = bindingsToMongoDbUrl(mongoDbBindings);
-    driver = [`${mongoDbBindings.type}`, "/", `${mongoDbBindings.provider}`].join("");
+    const uri = bindingsToMongoDbUrl2(mongoDbBindings);
+    driver = [
+      `${mongoDbBindings.type}`,
+      "/",
+      `${mongoDbBindings.provider}`,
+    ].join("");
 
-    return { url: uri, driver: driver, kind: "elephants" };
+    return {
+      url: uri,
+      driver: driver,
+      kind: "elephants",
+      hostname: os.hostname(),
+    };
   },
 };
