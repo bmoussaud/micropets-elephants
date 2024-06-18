@@ -78,7 +78,9 @@ function countPets() {
 module.exports = {
   connectDB: function () {
     console.log("->>>connectDB");
-    if (!process.env.MONGODB_ADDON_URI === undefined) {
+    console.log(process.env.MONGODB_ADDON_URI);
+    
+    if (process.env.MONGODB_ADDON_URI) {
       console.log("Connecting using MONGODB_ADDON_URI env: ");
       url = process.env.MONGODB_ADDON_URI;
       mongoose.connect(process.env.MONGODB_ADDON_URI, {

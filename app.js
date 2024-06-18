@@ -51,6 +51,7 @@ app.use(function (err, req, res, next) {
 });
 
 
+/*
 const all = csb.all_bindings()
 console.log(all)
 console.log("->>>load app Configuration -----------------------------------------------")
@@ -59,6 +60,7 @@ const appBindings = csb.bindings("config")
 console.log(appBindings)
 Object.entries(appBindings).forEach(([k, v]) => { process.env[k] = v })
 console.log("<<<-load app Configuration -----------------------------------------------")
+*/
 
 mongodb.connectDB();
 
